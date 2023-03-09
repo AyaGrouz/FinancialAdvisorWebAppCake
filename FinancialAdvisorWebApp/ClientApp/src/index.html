@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Financial Advisor</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="assets/user/css/util.css">
+  <link rel="stylesheet" type="text/css" href="assets/user/css/main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+  <link rel="stylesheet" href="assets/template/assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/template/assets/css/templatemo-finance-business.css">
+  <link rel="stylesheet" href="assets/template/assets/css/owl.css">
+  <link href="assets/template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="mat-typography">
+  <app-root>
+        <!-- ***** Preloader Start ***** -->
+        <div id="preloader">
+          <div class="jumper">
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+      </div>  
+      <!-- ***** Preloader End ***** -->
+<!--     <div class="spinner">
+      <span>Loading... Please wait.</span>
+      <br />
+      <br />
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div> -->
+  </app-root>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+         <!-- Bootstrap core JavaScript -->
+         <script src="assets/template/vendor/jquery/jquery.min.js"></script>
+         <script src="assets/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     
+         <!-- Additional Scripts -->
+         <script src="assets/template/assets/js/custom.js"></script>
+         <script src="assets/template/assets/js/owl.js"></script>
+         <script src="assets/template/assets/js/slick.js"></script>
+         <script src="assets/template/assets/js/accordions.js"></script>
+         <script language = "text/Javascript"> 
+          cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+          function clearField(t){                   //declaring the array outside of the
+          if(! cleared[t.id]){                      // function makes it static and global
+              cleared[t.id] = 1;  // you could use true and false, but that's more typing
+              t.value='';         // with more chance of typos
+              t.style.color='#fff';
+              }
+          }
+        </script>
+</body>
+
+</html>

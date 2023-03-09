@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "signalr1": {
+      "restored": true,
+      "restoreTime": "2021-03-19T11:58:47.5708652Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-03-19T12:55:38.2841657Z"
+    }
+  },
+  "parameters": {
+    "signalr1.resourceGroupName": {
+      "Name": "signalr1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "FinancialAdvisorWebApp20210319122234ResourceGroup"
+    },
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "f0a3ea71-757f-4f7f-9947-cc6c1d178d14"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "FinancialAdvisorWebApp20210319122234ResourceGroup"
+    },
+    "signalr1.subscriptionId": {
+      "Name": "signalr1.subscriptionId",
+      "Type": "subscription",
+      "Value": "f0a3ea71-757f-4f7f-9947-cc6c1d178d14"
+    }
+  }
+}

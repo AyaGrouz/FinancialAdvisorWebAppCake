@@ -1,0 +1,23 @@
+Install python modules:
+	pip install -r requirements.txt
+
+Add your Twilio variables to the Envirenment variable of PC:
+	TWILIO_ACCOUNT_SID
+	TWILIO_API_KEY
+	TWILIO_API_SECRET
+	TWILIO_AUTH_TOKEN
+
+Change path of python in VideoController.cs
+
+Backend part
+	Delete Migration folder
+	In Package Manager Console :
+		Add-migration Initial
+		Update-database
+
+	Initiase Database :
+		Run the Sql Script from the InitialazationDb Folder
+		Change the connection string of the used DB
+
+	
+

@@ -1,0 +1,28 @@
+<!-- <nav class="navbar navbar-dark bg-white">
+    <a class="navbar-brand text-gray" *ngIf="userDetails" href="/home">
+         Welcome <strong class="navbar-brand text-green">
+            {{userDetails.fullName}}</strong>to <img src="assets/Images/Logo1.png">
+    </a>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+ </nav> -->
+<nav>
+    <div class="sub-header" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <ul class="left-info">
+                        <li><a href="#"><img src="assets/Images/Logo1.png"></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="right-icons">
+<!--                         <li><a href="#"><i class="fa fa-calendar"></i> {{dateDay}}</a></li>
+ -->                        <li><a href="/investisseur"><i class="fa fa-user"></i> Profile </a></li>
+                        <li><a href="#" (click)="onLogout()"><i class="fa fa-sign-out"></i> Logout </a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,21 @@
+<form #form='ngForm' class="login100-form validate-form" autocomplete="off" (submit)="onSubmit(form)">
+  <span class="login100-form-title p-b-20">
+    Login to <img src="assets/Images/Logo1.png" style="vertical-align:middle;">
+  </span>
+  <div class="wrap-input100 validate-input">
+    <input class="input100" type="text" #UserName="ngModel" name="UserName" id="UserName" [(ngModel)]="formModel.UserName" (blur)="onBlurMethod($event)" required>
+    <span class="focus-input100"></span>
+    <span class="label-input100">Username</span>
+  </div>
+
+  <div class="wrap-input100 validate-input">
+    <input class="input100" type="password" #Password="ngModel" name="Password" id="Password" [(ngModel)]="formModel.Password" (blur)="onBlurMethod($event)" required>
+    <span class="focus-input100"></span>
+    <span class="label-input100">Password</span>
+  </div>
+
+  <div class="container-login100-form-btn">
+    <button type="submit" class="login100-form-btn" [disabled]="form.invalid">Login</button>
+  </div>
+
+</form>

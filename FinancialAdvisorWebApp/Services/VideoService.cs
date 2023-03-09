@@ -1,0 +1,130 @@
+﻿using FinancialAdvisorWebApp.Models;
+using FinancialAdvisorWebApp.Options;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Twilio;
+using Twilio.Base;
+using Twilio.Jwt.AccessToken;
+using Twilio.Rest.Video.V1;
+using Twilio.Rest.Video.V1.Room;
+using Twilio.TwiML;
+using Twilio.TwiML.Voice;
+using ParticipantStatus = Twilio.Rest.Video.V1.Room.ParticipantResource.StatusEnum;
+
+namespace FinancialAdvisorWebApp.Services
+{
+    public class VideoService : IVideoService
+    {
+        readonly TwilioSettings _twilioSettings;
+
+        public VideoService(Microsoft.Extensions.Options.IOptions<TwilioSettings> twilioOptions)
+        {
+            _twilioSettings =
+                twilioOptions?.Value
+             ?? throw new ArgumentNullException(nameof(twilioOptions));
+
+            TwilioClient.Init(_twilioSettings.ApiKey, _twilioSettings.ApiSecret);
+        }
+
+        public string GetTwilioJwt(string identity)
+            => new Token(_twilioSettings.AccountSid,
+                         _twilioSettings.ApiKey,
+                         _twilioSettings.ApiSecret,
+                         identity ?? GetName(),
+                         grants: new HashSet<IGrant> { new VideoGrant() }).ToJwt();
+
+
+
+        public async Task<IEnumerable<RoomDetails>> GetAllRoomsAsync()
+        {
+            var rooms = await RoomResource.ReadAsync();
+            var tasks = rooms.Select(
+                room => GetRoomDetailsAsync(
+                    room,
+                    ParticipantResource.ReadAsync(
+                        room.Sid,
+                        ParticipantStatus.Connected)));
+
+            return await System.Threading.Tasks.Task.WhenAll(tasks);
+
+            static async Task<RoomDetails> GetRoomDetailsAsync(
+                RoomResource room,
+                Task<ResourceSet<ParticipantResource>> participantTask)
+            {
+                var participants = await participantTask;
+
+                return new(
+                    room.Sid,
+                    room.UniqueName,
+                    participants.Count(),
+                    room.MaxParticipants ?? 0);
+            }
+        }
+
+        public string GetLastCreatedRoom()
+        {
+            TwilioClient.Init(_twilioSettings.AccountSid, _twilioSettings.AuthToken);
+
+            ResourceSet<RoomResource> rooms = RoomResource.Read(
+                status: RoomResource.RoomStatusEnum.Completed,
+                limit: 20
+            );
+            RoomResource room = rooms.First();
+            return room.UniqueName;
+        }
+
+        public string completeRoom(string roomSid)
+        {
+            TwilioClient.Init(_twilioSettings.AccountSid, _twilioSettings.AuthToken);
+
+            var room = RoomResource.Update(
+                status: RoomResource.RoomStatusEnum.Completed,
+                pathSid: roomSid
+            );
+
+            return room.UniqueName;
+        }
+
+
+        #region Borrowed from https://github.com/twilio/video-quickstart-js/blob/1.x/server/randomname.js
+
+        readonly string[] _adjectives =
+        {
+            "Abrasive", "Brash", "Callous", "Daft", "Eccentric", "Feisty", "Golden",
+            "Holy", "Ignominious", "Luscious", "Mushy", "Nasty",
+            "OldSchool", "Pompous", "Quiet", "Rowdy", "Sneaky", "Tawdry",
+            "Unique", "Vivacious", "Wicked", "Xenophobic", "Yawning", "Zesty"
+        };
+
+        readonly string[] _firstNames =
+        {
+            "Anna", "Bobby", "Cameron", "Danny", "Emmett", "Frida", "Gracie", "Hannah",
+            "Isaac", "Jenova", "Kendra", "Lando", "Mufasa", "Nate", "Owen", "Penny",
+            "Quincy", "Roddy", "Samantha", "Tammy", "Ulysses", "Victoria", "Wendy",
+            "Xander", "Yolanda", "Zelda"
+        };
+
+        readonly string[] _lastNames =
+        {
+            "Anchorage", "Berlin", "Cucamonga", "Davenport", "Essex", "Fresno",
+            "Gunsight", "Hanover", "Indianapolis", "Jamestown", "Kane", "Liberty",
+            "Minneapolis", "Nevis", "Oakland", "Portland", "Quantico", "Raleigh",
+            "SaintPaul", "Tulsa", "Utica", "Vail", "Warsaw", "XiaoJin", "Yale",
+            "Zimmerman"
+        };
+
+        string GetName() => $"{_adjectives.RandomElement()} {_firstNames.RandomElement()} {_lastNames.RandomElement()}";
+
+        #endregion
+    }
+
+    static class StringArrayExtensions
+    {
+        static readonly Random Random = new((int)DateTime.Now.Ticks);
+
+        internal static string RandomElement(this IReadOnlyList<string> array)
+            => array[Random.Next(array.Count)];
+    }
+}

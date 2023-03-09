@@ -1,0 +1,18 @@
+div.jumbotron {
+    background-color: transparent;
+}
+
+button > i {
+    padding-right: 6px;
+}
+
+.twitter-red {
+    color: #F22F46;
+}
+.twitter-green {
+    color: #c1d82f;
+}
+
+a {
+    font-size: 1.25rem;
+}
